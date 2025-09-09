@@ -1,0 +1,26 @@
+name: Homarr
+
+services:
+  homarr:
+    image: ghcr.io/homarr-labs/homarr:v${HOMARR_VERSION}
+    container_name: homarr
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - homarr_appdata:/appdata
+    environment:
+      - SECRET_ENCRYPTION_KEY=${HOMARR_SECRET_ENCRYPTION_KEY}
+    ports:
+      - "127.0.0.1:7575:7575"
+    networks:
+      - nginx-proxy-manager_frontend
+    restart: unless-stopped
+    labels:
+      - wud.tag.include=^v\d+\.\d+\.\d+$$
+
+networks:
+  nginx-proxy-manager_frontend:
+    driver: bridge
+    external: true
+
+volumes:
+  homarr_appdata:
