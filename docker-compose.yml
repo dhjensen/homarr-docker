@@ -13,11 +13,17 @@ services:
       - "127.0.0.1:7575:7575"
     networks:
       - nginx-proxy-manager_frontend
+      - backend
     restart: unless-stopped
     labels:
       - wud.tag.include=^v\d+\.\d+\.\d+$$
+      - traefik.enable=true
+      - traefik.http.routers.homarr-homarr.rule=Host(`homarr.dhjensen.tech`)
 
 networks:
+  backend:
+    driver: bridge
+    external: true
   nginx-proxy-manager_frontend:
     driver: bridge
     external: true
