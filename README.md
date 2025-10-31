@@ -7,6 +7,6 @@ My docker compose for [Homarr](https://homarr.dev/)
 Can genereate the 64 char hex with `openssl rand -hex 32`
 
 ```bash
-HOMARR_VERSION=version
+HOMARR_VERSION=1.43.0
 HOMARR_SECRET_ENCRYPTION_KEY=64 char hex
 ```
